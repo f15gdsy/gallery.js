@@ -1,6 +1,6 @@
 {
   "name": "gallery.js",
-  "version": "0.1.0",
+  "version": "1.0.0-alpha.1",
   "description": "An even more lightweight version of film.js, a film like animation, that works for image.",
   "main": "dist/gallery.min.js",
   "author": "Wu Yifeng",
