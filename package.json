@@ -1,0 +1,22 @@
+{
+  "name": "gallery.js",
+  "version": "0.1.0",
+  "description": "An even more lightweight version of film.js, a film like animation, that works for image.",
+  "main": "dist/gallery.min.js",
+  "author": "Wu Yifeng",
+  "license": "MIT",
+  "scripts": {
+    "start": "rollup -w --config build/rollup.config.js"
+  },
+  "devDependencies": {
+    "rollup": "^0.41.6",
+    "rollup-plugin-buble": "^0.15.0",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-uglify": "^1.0.1",
+    "rollup-watch": "^3.2.2"
+  },
+  "dependencies": {
+    "simple-assign": "^0.1.0"
+  }
+}
