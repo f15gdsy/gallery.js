@@ -11,7 +11,7 @@ for (var i = 0; i < 8; i++) {
 
   new Gallery(el, imgs, {
     direction: i % 2 === 0 ? 'left': 'right',
-    duration: 30,
+    duration: 50,
     imgWidth: 120,
     imgHeight: 220,
     gapX: 10

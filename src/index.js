@@ -1,4 +1,3 @@
-import animations from 'create-keyframe-animation'
 import assign from 'simple-assign'
 import utils from './utils'
 
@@ -8,7 +7,6 @@ const DEFAULT_OPTS = {
   imgHeight: 100, // px
   imgAlignX: 0.5,
   imgAlignY: 0.5,
-  cover: true,    // behave like background-size: cover
   gapX: 0,
   gapY: 0,
   duration: 10
@@ -20,18 +18,22 @@ class Gallery {
     this.imgs = utils.getImgs(imgs)
     this.opts = assign({}, DEFAULT_OPTS, userOpts)
 
+    utils.checkOpts(this.opts)
     this.refresh()
   }
 
   start() {
-
+    this.el.style.animationName = this.animName
   }
 
   stop() {
-
+    this.el.style.animationName = ''
   }
 
   refresh() {
+    if (this.styleEl) {
+      document.head.removeChild(this.styleEl)
+    }
     this._combineImgs()
     this._createRule()
   }
@@ -66,10 +68,10 @@ class Gallery {
 
         const direction = this.opts.direction
 
-        if (direction === 'left' || direction === 'right') {
+        if (this._isHorizonal) {
           dx = i * dw + (i + 1) * this.opts.gapX
           dy = 0
-        } else if (direction === 'top' || direction === 'bottom') {
+        } else {
           dx = 0
           dy = i * dh + (i + 1) * this.opts.gapY
         }
@@ -94,7 +96,7 @@ class Gallery {
     const canvas = document.createElement('canvas')
     const direction = this.opts.direction
 
-    if (direction === 'left' || direction === 'right') {
+    if (this._isHorizonal) {
       canvas.width = this._dominantSize
       canvas.height = this.opts.imgHeight
     } else {
@@ -118,13 +120,14 @@ class Gallery {
     const sheet = styleEl.sheet
 
     const animName = `gallery-${this.opts.direction}-${this._dominantSize}`
+    this.animName = animName;
 
     this.el.style.animationName = animName
     this.el.style.animationIterationCount = 'infinite'
     this.el.style.animationDuration = `${this.opts.duration}s`
     this.el.style.animationTimingFunction = 'linear'
 
-    if (this.opts.direction === 'left' || this.opts.direction === 'right') {
+    if (this._isHorizonal) {
       this.el.style.backgroundRepeatX = 'repeat'
       this.el.style.backgroundRepeatY = 'no-repeat'
     } else {
@@ -142,7 +145,7 @@ class Gallery {
           background-position: ${this._getAnimToData()};
         }
       }
-    `)
+    `, 0)
   }
 
   _getAnimToData() {
@@ -155,31 +158,27 @@ class Gallery {
         return `${size}px 0`
       case 'top':
         return `0 ${size}px`
-      case 'bottom':
+      case 'down':
         return `0 -${size}px`
-      default:
-        throw new Error('Gallery.js: Invalid direction', this.opts.direction)
     }
+  }
+
+  get _isHorizonal() {
+    return this.opts.direction === 'left' || this.opts.direction === 'right'
+  }
+
+  get _isVertical() {
+    return this.opts.direction === 'top' || this.opts.direction === 'down'
   }
 
   get _dominantSize() {
     const direction = this.opts.direction
-    if (direction === 'left' || direction === 'right') {
+    if (this._isHorizonal) {
       return this.imgs.length * (this.opts.imgWidth + this.opts.gapX)
-    } else if (direction === 'top' || direction === 'bottom') {
+    } else {
       return this.imgs.length * (this.opts.imgHeight + this.opts.gapY)
     }
   }
-}
-
-Gallery.init = function(selector, imgs, opts) {
-  const all = document.querySelectorAll(selector)
-  const results = []
-  for (let i = 0; i < all.length; i++) {
-    const el = all[i]
-    results.push(new Gallery(el, imgs, opts))
-  }
-  return results
 }
 
 export default Gallery

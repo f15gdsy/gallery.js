@@ -5,6 +5,10 @@
   "main": "dist/gallery.min.js",
   "author": "Wu Yifeng",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/f15gdsy/gallery.js"
+  },
   "scripts": {
     "start": "rollup -w --config build/rollup.config.js"
   },
