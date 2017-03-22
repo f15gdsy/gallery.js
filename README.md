@@ -14,12 +14,12 @@ Check out the demo here: https://f15gdsy.github.io/gallery.js/
 ## 1. Installation
 If you are using npm:
 ```
-npm install gallery.js --save
+npm install gallery-js --save
 ```
 
 If you are using yarn:
 ```
-yarn add gallery.js
+yarn add gallery-js
 ```
 
 
@@ -72,7 +72,7 @@ That's it!
   - **gapX** { Number } - The horizonal gap between each images. Default 0. Will be ignored if direction is set to 'top' or 'down'.
   - **gapY** { Number } - The vertical gap between each images. Default 0. Will be ignored if direction is set to 'left' or 'right'.
   - **duration** { Number } - How long should one rotation lasts. Default 10. Longer a gallery, it takes longer duration to achieve the same speed.
-  
+
 ## .start()
 Starts the animation.
 
