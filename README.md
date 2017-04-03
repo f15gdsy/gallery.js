@@ -2,8 +2,8 @@
 A small, high-performance, and minimal-dependence library for creating image infinite-scrolling animations.
 
 Compared to [film.js](https://f15gdsy.github.io/film.js/), gallery.js:
-  - is faster, as it uses native css animation, and no math calculation on every frame
-  - responsive by default, as it behaves like a background image
+  - is faster, as it creates the images combination once, and it uses native css animation, so no math calculation on every frame
+  - is responsive by default, as it behaves like a background image
   - works horizonally and vertically
   - ONLY works with images
 
@@ -49,6 +49,8 @@ const gallery = new Gallery(el, images, opts)
 ```
 
 That's it!
+
+You just created a single column (or row, depending on the direction option) with 4 different images.
 
 # API
 ## Constructor
